@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Broccoli Shop</title>
+</head>
+<body class="bg-gray-100">
+
+  <!-- 🌿 NAVBAR -->
+  <nav class="flex flex-wrap items-center justify-between p-4 bg-blue-700 text-white">
+    <h1 class="text-2xl font-bold">🥦 Broccoli Shop</h1>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="block lg:hidden bg-blue-600 px-3 py-2 rounded-md">
+      Menu
+    </button>
+
+    <!-- Navbar Links -->
+    <ul id="menu" class="hidden w-full lg:flex lg:w-auto lg:space-x-6 font-medium mt-4 lg:mt-0">
+      <li><a href="#" class="block py-2 lg:py-0 hover:text-yellow-300">Home</a></li>
+      <li><a href="#" class="block py-2 lg:py-0 hover:text-yellow-300">Products</a></li>
+      <li><a href="#" class="block py-2 lg:py-0 hover:text-yellow-300">About</a></li>
+      <li><a href="#" class="block py-2 lg:py-0 hover:text-yellow-300">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🖥️ HERO SECTION -->
+  <section class="text-center py-10 px-5 bg-blue-100">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-700">
+      Fresh & Healthy Broccoli
+    </h2>
+    <p class="mt-3 text-lg sm:text-xl text-gray-600">
+      Eat green, live clean 🌿
+    </p>
+  </section>
+
+  <!-- 🛒 PRODUCT GRID -->
+  <section class="p-6">
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+
+      <!-- CARD -->
+      <div class="rounded-lg overflow-hidden shadow-lg bg-blue-400 p-4 hover:scale-105 transition-transform duration-300 border-2 hover:border-red-400">
+        <img src="https://cdn.pixabay.com/photo/2016/06/11/15/33/broccoli-1450274_1280.png" 
+             alt="Broccoli" class="w-full h-48 object-contain">
+        <h2 class="font-bold mt-2 text-2xl text-white">Broccoli</h2>
+
+        <!-- Stars -->
+        <div class="flex items-center mt-2 mb-4">
+          <div class="flex text-yellow-300 space-x-1">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+              <path d="M20.924 7.625a1.523...Z"/>
+            </svg>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+              <path d="M20.924 7.625a1.523...Z"/>
+            </svg>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+              <path d="M20.924 7.625a1.523...Z"/>
+            </svg>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+              <path d="M20.924 7.625a1.523...Z"/>
+            </svg>
+            <svg class="w-4 h-4 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+              <path d="M20.924 7.625a1.523...Z"/>
+            </svg>
+          </div>
+          <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded-sm ms-3">5.0</span>
+        </div>
+
+        <!-- Price + Button -->
+        <div class="flex justify-between items-center">
+          <span class="text-2xl font-bold text-white">$5</span>
+          <a href="#" class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg px-4 py-2 text-sm">
+            Add to cart
+          </a>
+        </div>
+      </div>
+
+      <!-- 🥬 Copy more cards for more products -->
+      <div class="rounded-lg overflow-hidden shadow-lg bg-blue-400 p-4 hover:scale-105 transition-transform duration-300 border-2 hover:border-red-400">
+        <img src="https://cdn.pixabay.com/photo/2017/01/20/15/06/lettuce-1996931_1280.jpg"
+             alt="Lettuce" class="w-full h-48 object-contain">
+        <h2 class="font-bold mt-2 text-2xl text-white">Lettuce</h2>
+        <p class="text-yellow-200 mt-1">★★★★★</p>
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-2xl font-bold text-white">$3</span>
+          <a href="#" class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg px-4 py-2 text-sm">
+            Add to cart
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🦶 FOOTER -->
+  <footer class="bg-blue-800 text-white text-center py-4 mt-8">
+    <p class="text-sm">© 2025 Broccoli Shop | Built with ❤️ using Tailwind CSS</p>
+  </footer>
+
+  <!-- 📱 Mobile Menu Script -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>
