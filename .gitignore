@@ -1,0 +1,28 @@
+------------------------------------
+Node / Development Dependencies
+------------------------------------
+node_modules/
+
+Logs and Lock Files
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log*
+
+------------------------------------
+Build / Generated Files
+------------------------------------
+Ignore temporary and compiled code
+dist/
+build/
+.cache/
+
+Tailwind CSS Generated Output
+src/output.css
+
+------------------------------------
+OS & Editor Files
+------------------------------------
+.DS_Store # Mac operating system files
+Thumbs.db # Windows thumbnail caches
+.idea/    # JetBrains IDEs (e.g., WebStorm, IntelliJ)
+.vscode/  # VSCode settings (only ignore if they are user-specific, otherwise keep settings.json)
