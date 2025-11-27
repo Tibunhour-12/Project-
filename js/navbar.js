@@ -56,7 +56,7 @@ function renderNavbar(containerId, activePage = "") {
                     </button>
 
                     <!-- Note: link to sign-in page --> 
-                    <a href="./html/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-medium rounded-lg hover:bg-secondary transition duration-300 shadow-md">
+                    <a href="./pages/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-medium rounded-lg hover:bg-secondary transition duration-300 shadow-md">
                         Sign In
                     </a>
                 </div>
