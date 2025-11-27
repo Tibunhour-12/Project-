@@ -4,6 +4,7 @@
  * * @param {string} containerId - The ID of the div where the navbar should be injected.
  * @param {string} activePage - The name of the current page ('home', 'categories', 'about', 'mybook').
  */
+
 function renderNavbar(containerId, activePage = "") {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -62,7 +63,7 @@ function renderNavbar(containerId, activePage = "") {
   // We use `${pathPrefix}/` before every link.
 
   const navbarHTML = `
-    <nav class="fixed w-full top-0 z-50 bg-pure-white shadow-sm border-b border-gray-100 font-sans">
+    <nav class="w-full z-50 bg-pure-white shadow-sm font-primary">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
             <div class="flex justify-between items-center h-20">
                 
@@ -104,9 +105,6 @@ function renderNavbar(containerId, activePage = "") {
 
                 <!-- MOBILE MENU HAMBURGER -->
                 <div class="md:hidden flex items-center gap-4">
-                    <button class="text-dark-gray hover:text-primary">
-                        <i class="ph ph-magnifying-glass text-2xl"></i>
-                    </button>
                     <button id="mobile-menu-btn" class="text-primary focus:outline-none">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
@@ -114,28 +112,28 @@ function renderNavbar(containerId, activePage = "") {
             </div>
         </div>
 
-        <!-- MOBILE MENU DROPDOWN -->
-        <div id="mobile-menu" class="mobile-menu md:hidden bg-pure-white border-t border-gray-100 shadow-lg overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
+        <!-- 5. MOBILE MENU DROPDOWN -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-pure-white shadow-lg overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
             <div class="px-4 py-4 space-y-3 flex flex-col">
                 <a href="${pathPrefix}/index.html" class="block px-4 py-2 rounded-lg ${
     activePage === "home"
       ? "bg-gray-50 text-primary font-bold"
-      : "text-text-black hover:bg-gray-50"
+      : "text-primary hover:bg-gray-50"
   }">Home</a>
                 <a href="${pathPrefix}/pages/categories.html" class="block px-4 py-2 rounded-lg ${
     activePage === "categories"
       ? "bg-gray-50 text-primary font-bold"
-      : "text-text-black hover:bg-gray-50"
+      : "text-primary hover:bg-gray-50"
   }">Categories</a>
                 <a href="${pathPrefix}/pages/about.html" class="block px-4 py-2 rounded-lg ${
     activePage === "about"
       ? "bg-gray-50 text-primary font-bold"
-      : "text-text-black hover:bg-gray-50"
+      : "text-primary hover:bg-gray-50"
   }">About Us</a>
                 <a href="${pathPrefix}/pages/my-book.html" class="block px-4 py-2 rounded-lg ${
     activePage === "mybook"
       ? "bg-gray-50 text-primary font-bold"
-      : "text-text-black hover:bg-gray-50"
+      : "text-primary hover:bg-gray-50"
   }">My Book</a>
                 <hr class="border-gray-200">
                 <a href="${pathPrefix}/html/signin.html" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2 hover:bg-secondary">
@@ -146,6 +144,7 @@ function renderNavbar(containerId, activePage = "") {
     </nav>
     `;
 
+  // Inject HTML
   container.innerHTML = navbarHTML;
 
   // --- 4. EVENT LISTENERS ---
@@ -156,11 +155,13 @@ function renderNavbar(containerId, activePage = "") {
   if (btn && menu) {
     btn.addEventListener("click", () => {
       if (menu.classList.contains("max-h-0")) {
+        // Open Menu
         menu.classList.remove("max-h-0", "opacity-0");
         menu.classList.add("max-h-[500px]", "opacity-100");
         icon.classList.remove("ph-list");
         icon.classList.add("ph-x");
       } else {
+        // Close Menu
         menu.classList.add("max-h-0", "opacity-0");
         menu.classList.remove("max-h-[500px]", "opacity-100");
         icon.classList.remove("ph-x");
