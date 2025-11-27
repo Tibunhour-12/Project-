@@ -11,24 +11,6 @@
   --color-dark-gray: #6b7280; /* for text inside input text like email box. */
   --color-light-gray: #d1d5db; /* for divide line, hr */
   --color-background: #f9f7f7;
-
-  /* --- NEW: Marquee Animation for Tailwind v4 --- */
-  --animate-marquee: marquee 25s linear infinite;
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-}
-
-/* --- Custom Utilities --- */
-/* Tailwind v4 doesn't have a built-in utility for play-state: paused yet, so we add it manually */
-@utility pause {
-  animation-play-state: paused;
 }
 
 /* font */
