@@ -3,7 +3,7 @@ function initSeamlessMarquee(trackId) {
   if (!track) return;
 
   const originalContentWidth = track.scrollWidth;
-  const gap = 32;
+  const gap = 24;
 
   const children = Array.from(track.children);
 
