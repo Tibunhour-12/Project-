@@ -4,87 +4,296 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LibreShelf - Sign Up</title>
+    <script src="../js/signup.js"></script>
 
     <!-- Poppins Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- TailwindCSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
+        /* CSS Variables for easy color adjustments, matching requested button color */
+        :root {
+            --primary-blue: #112D4E; /* Equivalent to bg-blue-900 (custom color) */
+            --hover-blue: #0E2542; /* Slightly darker shade for hover effect (Equivalent to hover:bg-blue-800) */
+            --focus-ring-blue: #2563eb; /* Equivalent to focus:ring-blue-600 */
+            --light-bg: #f9fafb; /* Equivalent to bg-gray-50 */
+            --text-dark: #1f2937; /* Equivalent to text-gray-800 */
+            --text-medium: #374151; /* Equivalent to text-gray-700 */
+            --text-light: #4b5563; /* Equivalent to text-gray-600 */
+            --link-blue: #1d4ed8; /* Equivalent to text-blue-700 */
+            --red-alert: #ef4444; /* Equivalent to text-red-500 */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+            min-height: 100vh; /* min-h-screen */
+            background-color: white; /* bg-white */
+            display: flex; /* flex */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            padding: 1rem; /* px-4 */
+        }
+
+        .signup-card {
+            width: 100%; /* w-full */
+            max-width: 1152px; /* max-w-6xl */
+            background-color: white; /* bg-white */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden; /* overflow-hidden */
+            display: grid; /* grid */
+            grid-template-columns: 1fr; /* grid-cols-1 (Default/Mobile) */
+        }
+
+        /* Responsive Grid for Desktop */
+        @media (min-width: 1024px) {
+            .signup-card {
+                grid-template-columns: 1fr 1fr; /* lg:grid-cols-2 */
+            }
+        }
+
+        /* --- Form Side (Left) --- */
+        .form-side {
+            padding: 2.5rem; /* p-10 */
+            display: flex; /* flex */
+            flex-direction: column; /* flex-col */
+            justify-content: center; /* justify-center */
+        }
+
+        .back-button-container {
+            margin-bottom: 2rem; /* mb-8 */
+        }
+
+        .back-button {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            background-color: var(--primary-blue); /* bg-blue-900 */
+            color: white; /* text-white */
+            border-radius: 50%; /* rounded-full */
+            display: flex; /* flex */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700; /* font-bold */
+            cursor: pointer; /* cursor-pointer */
+            transition: background-color 0.2s; /* transition */
+        }
+        
+        .back-button:hover {
+            background-color: var(--hover-blue);
+        }
+
+        .form-side h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 600; /* font-semibold */
+            text-align: center; /* text-center */
+            color: var(--text-dark); /* text-gray-800 */
+            margin-bottom: 2.5rem; /* mb-10 */
+        }
+
+        .form-elements {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* space-y-6 equivalent */
+        }
+
+        .form-field {
+            /* No extra margin, gap handles spacing */
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            color: var(--text-medium); /* text-gray-700 */
+        }
+
+        .required-star {
+            color: var(--red-alert); /* text-red-500 */
+        }
+
+        .form-field input {
+            width: 100%; /* w-full */
+            margin-top: 0.25rem; /* mt-1 */
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border: 1px solid #d1d5db; /* border */
+            border-radius: 0.375rem; /* rounded-md */
+            outline: none; /* outline-none */
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        /* Focus styles equivalent to focus:ring-2 focus:ring-blue-600 */
+        .form-field input:focus {
+            border-color: var(--focus-ring-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); 
+        }
+
+        .sign-up-button {
+            width: 100%; /* w-full */
+            background-color: var(--primary-blue); /* bg-blue-900 */
+            color: white; /* text-white */
+            padding: 0.5rem 0; /* py-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 500; /* font-medium */
+            cursor: pointer; /* cursor-pointer */
+            transition: background-color 0.2s; /* transition */
+            border: none;
+            margin-top: 0.5rem; 
+        }
+
+        .sign-up-button:hover {
+            background-color: var(--hover-blue); /* hover:bg-blue-800 */
+        }
+
+        .signin-text {
+            font-size: 0.875rem; /* text-sm */
+            text-align: center; /* text-center */
+            color: var(--text-light); /* text-gray-600 */
+            margin-top: 1.5rem; 
+        }
+
+        .signin-link {
+            color: var(--link-blue); /* text-blue-700 */
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+        }
+        
+        .signin-link:hover {
+            text-decoration: underline; /* hover:underline */
+        }
+
+        /* --- Illustration Side (Right) --- */
+        .illustration-side {
+            background-color: var(--light-bg); /* bg-gray-50 */
+            padding: 2.5rem; /* p-10 */
+            display: none; 
+            flex-direction: column; /* flex-col */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            text-align: center; /* text-center */
+        }
+        
+        @media (min-width: 1024px) {
+            .illustration-side {
+                display: flex; /* lg:flex */
+            }
+        }
+
+        .illustration-side h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: var(--text-dark); /* text-gray-800 */
+            line-height: 1.2;
+            margin-top: 0.25rem; /* mt-1 */
+        }
+        
+        .illustration-side img {
+            width: 20rem; /* w-80 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            display: block; 
+            height: auto;
         }
     </style>
 </head>
 
-<body class="min-h-screen bg-white flex items-center justify-center px-4">
+<body>
     
-    <div class="w-full max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+    <div class="signup-card">
 
         <!-- LEFT SIDE (SIGN UP FORM) -->
-        <div class="p-10 flex flex-col justify-center">
+        <div class="form-side">
 
             <!-- Back Button -->
-            <div class="mb-8">
-                <div class="w-10 h-10 bg-blue-900 text-white rounded-full flex items-center justify-center text-xl font-bold cursor-pointer">
+            <div class="back-button-container">
+                <div class="back-button" onclick="handleBack()">
                     ←
                 </div>
             </div>
 
+            <h2>Sign Up</h2>
 
-
-            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">Sign Up</h2>
-
-            <form class="space-y-6">
+            <form class="form-elements" onsubmit="handleSignUp(event)">
 
                 <!-- Email -->
-                <div>
-                    <label class="text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
-                    <input type="email" placeholder="Enter your email"
-                        class="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-600 outline-none" />
+                <div class="form-field">
+                    <label>Email <span class="required-star">*</span></label>
+                    <input type="email" placeholder="Enter your email" required />
                 </div>
 
                 <!-- Password -->
-                <div>
-                    <label class="text-sm font-medium text-gray-700">Password <span class="text-red-500">*</span></label>
-                    <input type="password" placeholder="Enter your password"
-                        class="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-600 outline-none" />
+                <div class="form-field">
+                    <label>Password <span class="required-star">*</span></label>
+                    <input type="password" placeholder="Enter your password" required />
                 </div>
 
                 <!-- Confirm Password -->
-                <div>
-                    <label class="text-sm font-medium text-gray-700">Confirm Password</label>
-                    <input type="password" placeholder="Enter your confirm password"
-                        class="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-600 outline-none" />
+                <div class="form-field">
+                    <label>Confirm Password <span class="required-star">*</span></label>
+                    <input type="password" placeholder="Confirm your password" required />
                 </div>
 
                 <!-- Sign Up Button -->
-                <button type="submit"
-                    class="w-full bg-blue-900 text-white py-2 rounded-md font-medium hover:bg-blue-800 transition">
+                <button type="submit" class="sign-up-button">
                     Sign Up
                 </button>
 
                 <!-- Already have account -->
-                <p class="text-sm text-center text-gray-600">
+                <p class="signin-text">
                     Already have account? 
-                    <a href="#" class="text-blue-700 font-medium hover:underline">Sign in</a>
+                    <a href="#" class="signin-link">Sign in</a>
                 </p>
 
             </form>
         </div>
 
         <!-- RIGHT SIDE (ILLUSTRATION + TEXT) -->
-        <div class="lg:flex flex-col items-center justify-center bg-gray-50 p-10 text-center">
-
-            <h2 class="text-3xl font-bold text-gray-800">Hello ,Welcome</h2>
-            <h2 class="text-3xl font-bold text-gray-800 mt-1">To LibreShelf !</h2>
-             <img src="../img/Libreshelf.png"
+        <div class="illustration-side">
+            <h2 class="text-3xl font-bold text-gray-800">Hello, Welcome</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mt-1">To LibreShelf!</h2>
+            <!-- Placeholder image for the illustration -->
+            <img src="../img/Libreshelf.png"
                  alt="Illustration"
-                 class="w-80 mb-6">
+                 class="mb-6"
+                 style="width: 20rem; margin-top: 1rem;">
         </div>
 
     </div>
 
+    <script>
+        // JavaScript for handling the form submission (since alert is forbidden)
+        function handleSignUp(event) {
+            event.preventDefault();
+            const form = event.target;
+            const button = form.querySelector('.sign-up-button');
+            
+            // Temporary message box replacement
+            button.textContent = 'Processing...';
+            button.style.backgroundColor = '#9ca3af'; // gray color
+            button.disabled = true;
+
+            setTimeout(() => {
+                // Simulate form success
+                const message = document.createElement('div');
+                message.textContent = 'Account created successfully!';
+                message.style.cssText = 'position: fixed; top: 20px; right: 20px; background: green; color: white; padding: 10px 20px; border-radius: 5px; z-index: 1000;';
+                document.body.appendChild(message);
+                
+                button.textContent = 'Sign Up';
+                button.style.backgroundColor = 'var(--primary-blue)';
+                button.disabled = false;
+                form.reset();
+                
+                setTimeout(() => message.remove(), 3000);
+            }, 1500);
+        }
+        
+        // JavaScript for the back button (optional)
+        function handleBack() {
+             const message = document.createElement('div');
+             message.textContent = 'Navigating back...';
+             message.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--primary-blue); color: white; padding: 10px 20px; border-radius: 5px; z-index: 1000;';
+             document.body.appendChild(message);
+             setTimeout(() => message.remove(), 2000);
+        }
+    </script>
 </body>
 </html>
