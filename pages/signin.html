@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LibreShelf Login</title>
+
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables for easy color adjustments */
+        :root {
+            --primary-blue: #112D4E; /* Updated to the requested color */
+            --hover-blue: #0E2542; /* Slightly darker shade for hover effect */
+            --focus-ring-blue: #2563eb; /* Equivalent to blue-600 */
+            --light-bg: #f9fafb; /* Equivalent to gray-50 */
+            --text-dark: #1f2937; /* Equivalent to gray-800 */
+            --text-medium: #374151; /* Equivalent to gray-700 */
+            --text-light: #4b5563; /* Equivalent to gray-600 */
+            --link-blue: #1d4ed8; /* Equivalent to blue-700 */
+            --red-alert: #ef4444; /* Equivalent to red-500 */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem; /* px-4 */
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 1152px; /* max-w-6xl */
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr; /* grid-cols-1 (Default/Mobile) */
+        }
+
+        /* Responsive Grid for Desktop */
+        @media (min-width: 1024px) {
+            .login-card {
+                grid-template-columns: 1fr 1fr; /* lg:grid-cols-2 */
+            }
+        }
+
+        /* --- Left Side (Illustration) --- */
+        .illustration-side {
+            background-color: var(--light-bg);
+            padding: 2.5rem; /* p-10 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .illustration-side h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-top: 0.25rem; /* mt-1 */
+        }
+        
+        .illustration-side img {
+            width: 18rem; /* w-72 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            opacity: 0.9; /* opacity-90 */
+            /* Using a placeholder since the original image URL is relative */
+            display: block; 
+            height: auto;
+        }
+        
+        /* --- Right Side (Form) --- */
+        .form-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2.5rem; /* p-10 */
+        }
+
+        .return-button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .return-button {
+            width: 2.5rem; /* w-10 */
+            height: 2.5rem; /* h-10 */
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%; /* rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700; /* font-bold */
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .return-button:hover {
+            background-color: var(--hover-blue); /* Updated hover color */
+        }
+
+        .form-side h2 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 2rem; /* mb-8 */
+        }
+
+        .form-field {
+            margin-bottom: 1.25rem; /* space-y-5 */
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            color: var(--text-medium);
+        }
+
+        .required-star {
+            color: var(--red-alert);
+        }
+
+        .form-field input {
+            width: 100%;
+            margin-top: 0.25rem; /* mt-1 */
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border: 1px solid #d1d5db; /* border */
+            border-radius: 0.375rem; /* rounded-md */
+            outline: none;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        /* Focus styles equivalent to focus:ring-2 focus:ring-blue-600 */
+        .form-field input:focus {
+            border-color: var(--focus-ring-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); 
+        }
+
+        .forgot-password {
+            font-size: 0.875rem; /* text-sm */
+            color: #6B7280; /* Changed to a gray color */
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 1.25rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .sign-in-button {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 0; /* py-2 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 500; /* font-medium */
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border: none;
+            margin-top: 0.75rem; /* adjusted margin for layout */
+        }
+
+        .sign-in-button:hover {
+            background-color: var(--hover-blue); /* Updated hover color */
+        }
+
+        .signup-text {
+            font-size: 0.875rem; /* text-sm */
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 1.25rem; /* space after button */
+        }
+
+        .signup-link {
+            color: var(--link-blue);
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+        }
+        
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+        
+        .mt-1 { margin-top: 0.25rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .p-10 { padding: 2.5rem; }
+        
+    </style>
+</head>
+
+<body>
+    
+    <div class="login-card">
+
+        <!-- LEFT SIDE (Illustration/Welcome) -->
+        <div class="illustration-side">
+            <!-- Image placeholder since original URL is relative -->
+              <h2 class="text-3xl font-bold text-gray-800">Hello, Welcome</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mt-1">Back To LibreShelf!</h2>
+            <img src="../img/Libreshelf.png" 
+                 alt="LibreShelf Illustration"
+                 style="width: 18rem;" class="mb-6 opacity-90">
+
+           
+        </div>
+
+        <!-- RIGHT SIDE (SIGN IN FORM) -->
+        <div class="form-side">
+
+            <div class="return-button-container">
+                <div class="return-button">
+                    →
+                </div>
+            </div>
+
+            <h2>Sign In</h2>
+
+            <form class="space-y-5" onsubmit="handleSignIn(event)">
+
+                <!-- Email -->
+                <div class="form-field">
+                    <label>Email <span class="required-star">*</span></label>
+                    <input type="email" placeholder="Enter your email" required />
+                </div>
+
+                <!-- Password -->
+                <div class="form-field">
+                    <label>Password <span class="required-star">*</span></label>
+                    <input type="password" placeholder="Enter your password" required />
+                </div>
+
+                <a href="#" class="forgot-password">Forgot password?</a>
+
+                <!-- Sign in Button -->
+                <button type="submit" class="sign-in-button">
+                    Sign in
+                </button>
+
+                <p class="signup-text">
+                    Don’t have an account? 
+                    <a href="#" class="signup-link">Sign up</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>

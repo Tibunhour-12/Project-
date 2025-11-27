@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View History | LIBRESHELF</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Poppins Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Configure Tailwind to use Poppins for the sans font family */
+        :root {
+            --tw-font-sans: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: var(--tw-font-sans);
+            background-color: #f7f9fc; /* Light background for the body */
+        }
+        /* Custom styles for the cover image placeholder */
+        .book-cover {
+            width: 80px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .filter-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2 text-xl font-semibold text-gray-800">
+                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.464 9.492 5 8 5c-3.314 0-6 2.946-6 6.5S4.686 18 8 18c1.492 0 2.832-.464 4-1.253m0-13C13.168 5.464 14.508 5 16 5c3.314 0 6 2.946 6 6.5S19.314 18 16 18c-1.492 0-2.832-.464-4-1.253"></path></svg>
+                    <span>LIBRESHELF</span>
+                </a>
+                
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">Categories</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">About Us</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-150 ease-in-out">My Book</a>
+                </nav>
+
+                <!-- Icons & Sign In -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-400 hover:text-indigo-600 p-2 rounded-full transition duration-150 ease-in-out">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </button>
+                    <button class="text-gray-400 hover:text-indigo-600 p-2 rounded-full transition duration-150 ease-in-out">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </button>
+                    <a href="#" class="px-3 py-1 text-sm bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition duration-150 ease-in-out hidden sm:inline-flex items-center">
+                        Sign In
+                    </a>
+                    <!-- Mobile Menu Button (Hidden for brevity in this single file, but standard practice) -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 border-b pb-2">View history</h1>
+
+        <!-- Filters Section -->
+        <div class="mb-8 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
+                
+                <!-- Filter Group -->
+                <div class="flex flex-wrap items-center gap-4">
+                    <label for="filter-all" class="text-sm font-medium text-gray-700">Filter</label>
+                    <select id="filter-all" class="filter-select block w-full sm:w-auto pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option>All</option>
+                        <option>Started</option>
+                        <option>Finished</option>
+                    </select>
+
+                    <label for="sort-recent" class="text-sm font-medium text-gray-700">Sort :</label>
+                    <select id="sort-recent" class="filter-select block w-full sm:w-auto pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option>Recent</option>
+                        <option>Oldest</option>
+                        <option>Title (A-Z)</option>
+                    </select>
+                </div>
+
+                <!-- Clear All Button -->
+                <button class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition duration-150 ease-in-out sm:self-center">
+                    Clear All
+                </button>
+            </div>
+        </div>
+
+        <!-- History List -->
+        <div class="space-y-5">
+
+            <!-- Group: Today -->
+            <section>
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Today</h2>
+                
+                <!-- History Item 1 -->
+                <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 mb-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover';" alt="Guns, Germs, And Steel">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Guns, Germs, And Steel</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">19 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Jared Diamond</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                  <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 mb-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover';" alt="Guns, Germs, And Steel">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Guns, Germs, And Steel</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">19 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Jared Diamond</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- History Item 2 (Duplicate for layout replication) -->
+                <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 mb-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/1f2937/ffffff?text=Book+Cover';" alt="Guns, Germs, And Steel">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Guns, Germs, And Steel</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">19 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Jared Diamond</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group: Yesterday -->
+            <section class="space-y-5">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2 ">Yesterday</h2>
+                
+                <!-- History Item 3 -->
+                <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover';" alt="Psychology of Money">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Psychology of Money</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">18 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Morgan Housel</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover';" alt="Psychology of Money">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Psychology of Money</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">18 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Morgan Housel</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="history-item bg-white p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-6 border border-gray-100">
+                    
+                    <!-- Book Details (Image, Title, Info) -->
+                    <div class="flex items-start flex-grow">
+                        <img class="book-cover mr-4" src="https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover" onerror="this.onerror=null;this.src='https://placehold.co/80x120/4f46e5/ffffff?text=Book+Cover';" alt="Psychology of Money">
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 leading-snug">Psychology of Money</h3>
+                            <p class="text-sm text-indigo-600 mt-1">Adventure | Horror</p>
+                            <p class="text-xs text-gray-500 mt-1">Viewed: <span class="font-medium text-gray-600">11:11 PM</span></p>
+                            <p class="text-xs text-gray-500">Date: <span class="font-medium text-gray-600">18 November 2025</span></p>
+                            <p class="text-xs text-gray-600 mt-2 italic">Morgan Housel</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Continue Reading, Delete) -->
+                    <div class="flex items-center space-x-4 self-end md:self-center">
+                        <button class="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out w-full md:w-auto whitespace-nowrap">
+                            Continue Reading
+                        </button>
+                        <button class="text-gray-400 hover:text-red-500 p-2 rounded-full transition duration-150 ease-in-out">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-12 pt-10 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                
+                <!-- Logo & Social -->
+                <div class="col-span-2 md:col-span-1">
+                    <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-white mb-4">
+                        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.464 9.492 5 8 5c-3.314 0-6 2.946-6 6.5S4.686 18 8 18c1.492 0 2.832-.464 4-1.253m0-13C13.168 5.464 14.508 5 16 5c3.314 0 6 2.946 6 6.5S19.314 18 16 18c-1.492 0-2.832-.464-4-1.253"></path></svg>
+                        <span>LIBRESHELF</span>
+                    </a>
+                    <div class="flex space-x-4 mt-2">
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-150 ease-in-out"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 4.026a9.982 9.982 0 01-2.825.787 4.986 4.986 0 002.164-2.723 9.988 9.988 0 01-3.141 1.257 4.983 4.983 0 00-8.48 4.544c-3.297-.16-6.223-1.745-8.18-4.126.34.582.535 1.258.535 1.981A4.986 4.986 0 003.545 13.9a4.992 4.992 0 01-2.253-.622c.162.404.254.838.254 1.282A4.986 4.986 0 005.14 17.5c-.88.24-1.802.37-2.735.105.127.323.238.647.337.973A14.07 14.07 0 0012 21.5c4.137 0 8.016-3.27 9.155-8.917.15-.758.232-1.528.232-2.302A10.035 10.035 0 0022 4.026z"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-150 ease-in-out"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.417 2.865 8.17 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.37-1.344-3.37-1.344-.454-1.157-1.11-1.465-1.11-1.465-.908-.618.068-.606.068-.606 1.007.07 1.53.518 1.53.518.89 1.524 2.348 1.084 2.91.823.09-.638.349-1.083.636-1.332-2.22-.25-4.555-1.11-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.251-.446-1.266.098-2.64c0 0 .84-.268 2.75 1.022A9.58 9.58 0 0112 6.844c.85.004 1.70.113 2.502.324 1.909-1.29 2.748-1.022 2.748-1.022.542 1.374.202 2.389.099 2.64.64.696 1.028 1.587 1.028 2.675 0 3.826-2.336 4.673-4.562 4.923.364.31.686.92.686 1.855 0 1.335-.012 2.417-.012 2.747 0 .268.18.577.688.488C19.136 20.215 22 16.46 22 12.017 22 6.484 17.523 2 12 2z" clip-rule="evenodd"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition duration-150 ease-in-out"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a4 4 0 10-8 0 4 4 0 008 0zM12 14c-4.418 0-8 3.582-8 8h16c0-4.418-3.582-8-8-8z"></path></svg></a>
+                    </div>
+                </div>
+
+                <!-- Book Category (Responsive Layout) -->
+                <div class="md:col-span-1">
+                    <h3 class="text-base font-semibold text-white mb-3 uppercase">Book Category</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition duration-150">History</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Horror-Thriller</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Love Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Science Fiction</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Business</a></li>
+                    </ul>
+                </div>
+
+                <!-- More Categories (Responsive Layout) -->
+                <div class="md:col-span-1">
+                    <ul class="text-sm space-y-2 pt-6 md:pt-0">
+                        <li><a href="#" class="hover:text-white transition duration-150">Biography</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Astrology</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Digital Marketing</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Software Development</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Ecommerce</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sitemap -->
+                <div class="md:col-span-1">
+                    <h3 class="text-base font-semibold text-white mb-3 uppercase">Sitemap</h3>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition duration-150">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Categories</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">About</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">My Books</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-xs text-gray-500 pt-4">
+                &copy; 2025 LIBRESHELF. Built as a Fictional Project for WEB Design Course.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html> 
