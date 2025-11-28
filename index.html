@@ -8,6 +8,13 @@
 
     <!-- Icons links -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       /* Smooth Mobile Menu Transition */
       .mobile-menu {
@@ -29,7 +36,7 @@
     <div id="navbar-container"></div>
 
     <!-- Hero Section -->
-    <section class="relative bg-primary overflow-hidden">
+    <section class="relative bg-primary overflow-hidden pt-20">
       <!-- Container -->
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <div
@@ -249,7 +256,7 @@
           </h2>
           <!-- View All Link -->
           <a
-            href="./html/categories.html"
+            href="./pages/categories.html"
             class="sm:flex items-center gap-2 text-secondary font-semibold hover:text-primary transition"
           >
             View All <i class="ph-bold ph-arrow-right"></i>
@@ -439,7 +446,7 @@
           </div>
           <div class="relative flex justify-center">
             <a
-              href="./html/categories.html"
+              href="./pages/categories.html"
               class="bg-background px-4 text-sm font-bold text-secondary hover:text-primary transition-colors uppercase tracking-wider flex items-center gap-2"
             >
               See More <i class="ph-bold ph-caret-right"></i>
@@ -579,14 +586,16 @@
             <div class="flex gap-4 items-start">
               <!-- Left Section: Profile -->
               <img
-                src="https://randomuser.me/api/portraits/men/75.jpg"
+                src="./img/profile/sovannreach.JPG"
                 alt="User 1"
                 class="w-10 h-10 rounded-full object-cover flex-shrink-0"
               />
               <!-- Right Section: Content -->
               <div class="flex-grow">
                 <div class="flex justify-between items-center mb-1">
-                  <h4 class="font-semibold text-text-black text-sm">Alex R.</h4>
+                  <h4 class="font-semibold text-text-black text-sm">
+                    Vorng Sovannreach
+                  </h4>
                   <div class="flex items-center text-accent text-xs">
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
@@ -606,7 +615,7 @@
             <div class="flex gap-4 items-start">
               <!-- Left Section: Profile -->
               <img
-                src="https://randomuser.me/api/portraits/women/80.jpg"
+                src="./img/profile/chamroeun.jpg"
                 alt="User 2"
                 class="w-10 h-10 rounded-full object-cover flex-shrink-0"
               />
@@ -614,19 +623,18 @@
               <div class="flex-grow">
                 <div class="flex justify-between items-center mb-1">
                   <h4 class="font-semibold text-text-black text-sm">
-                    Maria S.
+                    Thoun Chamroeun
                   </h4>
                   <div class="flex items-center text-accent text-xs">
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
                     <i class="ph-fill ph-star"></i>
-                    <i class="ph-bold ph-star-half"></i>
                   </div>
                 </div>
                 <p class="text-sm text-dark-gray line-clamp-3">
-                  "Four and a half stars! I love the collection, but wish there
-                  were more history titles. Overall great job."
+                  "Four stars! I love the collection, but wish there were more
+                  history titles. Overall great job."
                 </p>
               </div>
             </div>
@@ -635,7 +643,7 @@
             <div class="flex gap-4 items-start">
               <!-- Left Section: Profile -->
               <img
-                src="https://randomuser.me/api/portraits/men/12.jpg"
+                src="./img/profile/david.JPG"
                 alt="User 3"
                 class="w-10 h-10 rounded-full object-cover flex-shrink-0"
               />
@@ -643,7 +651,7 @@
               <div class="flex-grow">
                 <div class="flex justify-between items-center mb-1">
                   <h4 class="font-semibold text-text-black text-sm">
-                    Kenji T.
+                    Phin Sopheacheadevid
                   </h4>
                   <div class="flex items-center text-accent text-xs">
                     <i class="ph-fill ph-star"></i>
@@ -716,7 +724,7 @@
 
               <button
                 type="submit"
-                class="w-full py-3 mt-4 bg-accent text-primary font-bold rounded-lg shadow-md hover:bg-yellow-400 transition duration-300 uppercase tracking-wider"
+                class="w-full py-3 mt-4 bg-accent text-pure-white font-bold rounded-lg shadow-md hover:bg-yellow-400 transition duration-300 uppercase tracking-wider"
               >
                 Send Review
               </button>
@@ -747,9 +755,7 @@
       <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- HEADER -->
         <div class="text-center mb-20">
-          <h2
-            class="text-3xl md:text-5xl font-extrabold text-pure-white tracking-tight"
-          >
+          <h2 class="text-3xl md:text-5xl font-extrabold text-pure-white">
             How LibreShelf Works
           </h2>
           <p class="text-gray-300 mt-4 text-lg max-w-2xl mx-auto">
@@ -765,9 +771,11 @@
           >
             <!-- Floating Icon (Centered Top) -->
             <div
-              class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+              class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
             >
-              <i class="ph-bold ph-magnifying-glass text-primary text-3xl"></i>
+              <i
+                class="ph-bold ph-magnifying-glass text-pure-white text-3xl"
+              ></i>
             </div>
 
             <h3 class="text-xl font-bold text-pure-white mb-4 mt-4">
@@ -807,9 +815,9 @@
           >
             <!-- Floating Icon -->
             <div
-              class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+              class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
             >
-              <i class="ph-bold ph-users-three text-primary text-3xl"></i>
+              <i class="ph-bold ph-users-three text-pure-white text-3xl"></i>
             </div>
 
             <h3 class="text-xl font-bold text-pure-white mb-4 mt-4">
@@ -841,10 +849,10 @@
 
             <!-- Sign Up Button -->
             <a
-              href="./html/signin.html"
-              class="flex-shrink-0 bg-accent text-primary font-bold py-3 px-8 rounded-full hover:bg-yellow-400 transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              href="./pages/signin.html"
+              class="flex-shrink-0 bg-secondary text-pure-white font-bold py-3 px-8 rounded-full hover:bg-blue-400 transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              Sign Up Now! <i class="ph-bold ph-arrow-right"></i>
+              Sign Up Now!
             </a>
           </div>
 
