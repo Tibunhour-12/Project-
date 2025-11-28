@@ -62,8 +62,9 @@ function renderNavbar(containerId, activePage = "") {
   // --- 3. HTML TEMPLATE ---
   // We use `${pathPrefix}/` before every link.
 
+  // bg-white/10 backdrop-blur-md border border-white/20
   const navbarHTML = `
-    <nav class="w-full z-50 bg-pure-white shadow-sm font-primary">
+    <nav class="fixed w-full z-50 bg-pure-white shadow-sm font-primary">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
             <div class="flex justify-between items-center h-20">
                 
@@ -84,7 +85,7 @@ function renderNavbar(containerId, activePage = "") {
                     <a href="${pathPrefix}/pages/about.html" class="${getLinkClass(
     "about"
   )}">About Us</a>
-                    <a href="${pathPrefix}/pages/my-book.html" class="${getLinkClass(
+                    <a href="${pathPrefix}/pages/book.html" class="${getLinkClass(
     "mybook"
   )}">My Book</a>
                 </div>
@@ -98,7 +99,7 @@ function renderNavbar(containerId, activePage = "") {
                         <i class="ph ph-heart text-2xl"></i>
                     </button>
                     <!-- Sign In Link -->
-                    <a href="${pathPrefix}/html/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-semibold rounded-lg hover:bg-secondary transition duration-300 shadow-md">
+                    <a href="${pathPrefix}/pages/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-semibold rounded-lg hover:bg-secondary transition duration-300 shadow-md">
                         Sign In
                     </a>
                 </div>
