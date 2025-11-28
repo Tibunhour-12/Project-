@@ -60,38 +60,38 @@ function renderFooter(containerId) {
                         <div class="grid grid-cols-2 gap-x-12 gap-y-4 text-dark-gray text-sm">
                             <!-- Col 1 -->
                             <div class="space-y-3 flex flex-col">
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> History
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Horror - Thriller
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Love Stories
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Science Fiction
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Business
                                 </a>
                             </div>
                             
                             <!-- Col 2 -->
                             <div class="space-y-3 flex flex-col">
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Biography
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Astrology
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Digital Marketing
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Software Development
                                 </a>
-                                <a href="#" class="hover:text-secondary transition-colors flex items-center gap-2 group">
+                                <a href="#" class="hover:text-secondary transition-colors dark:text-gray-400 flex items-center gap-2 group">
                                     <i class="ph-bold ph-caret-right text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i> Self-Help
                                 </a>
                             </div>
@@ -100,7 +100,7 @@ function renderFooter(containerId) {
                 </div>
 
                 <!-- 3. RIGHT SECTION: Sitemap (Span 3) -->
-                <div class="lg:col-span-3 flex flex-col lg:items-end">
+                <div class="lg:col-span-3 dark:text-gray-400 flex flex-col lg:items-end">
                     <div class="w-full lg:w-auto text-left lg:text-right">
                         <h3 class="text-lg font-bold text-primary mb-8 uppercase tracking-wider border-b border-secondary/30 pb-2 inline-block">
                             Sitemap
