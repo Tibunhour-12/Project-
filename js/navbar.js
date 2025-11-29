@@ -55,9 +55,11 @@ function renderNavbar(containerId, activePage = "") {
 
   // --- 2. HELPER FOR ACTIVE LINKS ---
   const getLinkClass = (pageName) => {
-    const baseClass = "font-medium transition-colors duration-200";
-    const activeClass = "text-primary font-bold";
-    const inactiveClass = "text-primary hover:text-secondary";
+    const baseClass =
+      "font-medium transition-colors duration-200 dark:text-gray-300";
+    const activeClass = "text-primary font-bold dark:text-accent";
+    const inactiveClass =
+      "text-primary hover:text-secondary dark:hover:text-white";
 
     return activePage === pageName
       ? `${baseClass} ${activeClass}`
@@ -66,12 +68,11 @@ function renderNavbar(containerId, activePage = "") {
 
   // --- 3. DYNAMIC BUTTONS (Sign In vs Logout) ---
   let authButtonHTML = "";
-
   if (isLoggedIn) {
     // User is Logged In -> Show Logout
     authButtonHTML = `
         <div class="flex items-center gap-4">
-            <span class="hidden lg:inline text-sm font-semibold text-primary capitalize">
+            <span class="hidden lg:inline text-sm font-semibold text-primary dark:text-white capitalize">
                 Hi, ${userRole || "User"}
             </span>
             <button id="logout-btn" class="px-5 py-2 bg-primary text-pure-white border font-semibold rounded-lg hover:bg-primary transition shadow-sm flex items-center gap-2">
@@ -93,7 +94,7 @@ function renderNavbar(containerId, activePage = "") {
 
   // bg-white/10 backdrop-blur-md border border-white/20
   const navbarHTML = `
-    <nav class="fixed w-full z-50 bg-pure-white shadow-sm font-primary">
+    <nav class="fixed w-full z-50 bg-pure-white dark:bg-slate-900 shadow-sm font-primary">
         <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
             <div class="flex justify-between items-center h-20">
                 
@@ -121,11 +122,12 @@ function renderNavbar(containerId, activePage = "") {
 
                 <!-- RIGHT ICONS & BUTTON -->
                 <div class="hidden md:flex items-center gap-5">
-                    <button class="text-dark-gray hover:text-primary transition-colors">
+                    <button id="theme-toggle" class="text-dark-gray hover:text-primary dark:text-gray-300 dark:hover:text-accent transition-colors">
                         <i class="ph ph-moon text-2xl"></i>
                     </button>
+
                     <!-- Favorite Icon (Only functional if logged in) -->
-                    <button class="text-dark-gray hover:text-secondary transition-colors relative">
+                    <button class="text-dark-gray hover:text-secondary dark:text-gray-300 transition-colors relative">
                         <i class="ph ph-heart text-2xl"></i>
                         ${
                           isLoggedIn
@@ -141,37 +143,44 @@ function renderNavbar(containerId, activePage = "") {
 
                 <!-- MOBILE MENU HAMBURGER -->
                 <div class="md:hidden flex items-center gap-4">
-                    <button id="mobile-menu-btn" class="text-primary focus:outline-none">
+                    <button id="mobile-menu-btn" class="text-primary dark:text-white focus:outline-none">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
+                </div>
                 </div>
             </div>
         </div>
 
         <!-- 5. MOBILE MENU DROPDOWN -->
-        <div id="mobile-menu" class="mobile-menu md:hidden bg-pure-white shadow-lg overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-pure-white dark:bg-slate-900 shadow-lg overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
             <div class="px-4 py-4 space-y-3 flex flex-col">
                 <a href="${pathPrefix}/index.html" class="block px-4 py-2 rounded-lg ${
     activePage === "home"
-      ? "bg-gray-50 text-primary font-bold"
-      : "text-primary hover:bg-gray-50"
+      ? "bg-gray-50 dark:bg-slate-800 text-primary font-bold"
+      : "text-primary dark:text-accent hover:bg-gray-50 dark:hover:bg-slate-800"
   }">Home</a>
                 <a href="${pathPrefix}/pages/categories.html" class="block px-4 py-2 rounded-lg ${
     activePage === "categories"
-      ? "bg-gray-50 text-primary font-bold"
-      : "text-primary hover:bg-gray-50"
+      ? "bg-gray-50 dark:bg-slate-800 text-primary  dark:text-accent font-bold"
+      : "text-primary dark:text-gray-300 hover:bg-gray-50 dark:bg-slate-800"
   }">Categories</a>
                 <a href="${pathPrefix}/pages/about.html" class="block px-4 py-2 rounded-lg ${
     activePage === "about"
-      ? "bg-gray-50 text-primary font-bold"
-      : "text-primary hover:bg-gray-50"
+      ? "bg-gray-50 dark:bg-slate-800 text-primary dark:text-accent font-bold"
+      : "text-primary dark:text-gray-300 hover:bg-gray-50 "
   }">About Us</a>
                 <a href="${pathPrefix}/pages/my-book.html" class="block px-4 py-2 rounded-lg ${
     activePage === "mybook"
-      ? "bg-gray-50 text-primary font-bold"
-      : "text-primary hover:bg-gray-50"
+      ? "bg-gray-50 dark:bg-slate-800 text-primary dark:text-accent font-bold"
+      : "text-primary dark:text-gray-300 hover:bg-gray-50"
   }">My Book</a>
                 <hr class="border-gray-200">
+
+                <!-- Mobile Theme Toggle -->
+                <button id="mobile-theme-toggle" class="flex items-center justify-between w-full px-4 py-2 text-text-black dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">
+                    <span>Dark Mode</span>
+                    <i class="ph ph-moon text-xl"></i>
+                </button>
                  <!-- Mobile Auth Button -->
                 ${
                   isLoggedIn
@@ -228,4 +237,41 @@ function renderNavbar(containerId, activePage = "") {
 
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
   if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", handleLogout);
+
+  const updateIcons = () => {
+    // Check if html tag has .dark class
+    const isDark = document.documentElement.classList.contains("dark");
+    const iconClass = isDark ? "ph-sun" : "ph-moon"; // Swap Icon: Sun for Dark, Moon for Light
+
+    const desktopIcon = document.querySelector("#theme-toggle i");
+    const mobileIcon = document.querySelector("#mobile-theme-toggle i");
+
+    if (desktopIcon) {
+      desktopIcon.className = `ph ${iconClass} text-2xl`;
+    }
+    if (mobileIcon) {
+      mobileIcon.className = `ph ${iconClass} text-xl`;
+    }
+  };
+
+  // Run once on load to set initial icon
+  updateIcons();
+
+  // Listen for clicks
+  const toggleBtn = document.getElementById("theme-toggle");
+  const mobileToggleBtn = document.getElementById("mobile-theme-toggle");
+
+  const handleToggle = () => {
+    // Call the global Theme Manager we created in theme.js
+    if (window.LibreTheme) {
+      window.LibreTheme.toggle();
+      updateIcons();
+    } else {
+      console.error("LibreTheme not found. Make sure theme.js is loaded!");
+    }
+  };
+
+  if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
+  if (mobileToggleBtn) mobileToggleBtn.addEventListener("click", handleToggle);
 }
+// Dark mode
