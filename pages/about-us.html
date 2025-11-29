@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us</title>
-    <link rel="stylesheet" href="src/output.css" />
+    <!-- Icons links -->
+    <link rel="stylesheet" href="../src/output.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Dark/Light mode theme -->
+    <script src="../js/theme.js"></script>
   </head>
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -14,8 +26,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
-  <!-- tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- color -->
   <script>
     tailwind.config = {
@@ -437,19 +448,17 @@
     <!-- Footer Position -->
     <div id="footer"></div>
 
-    <!-- Import footer.js -->
-    <script src="/js/footer.js"></script>
-
-    <!-- Call function -->
-    <script>
-      renderFooter("footer");
-    </script>
     <!-- Import navbar.js -->
     <script src="../js/navbar.js"></script>
 
+    <!-- Import footer.js -->
+    <script src="../js/footer.js"></script>
+
     <!-- Call function -->
     <script>
-      renderNavbar("navbar-container", "about"); // Use "about" for active link
+      // Use "about" for active link
+      renderNavbar("navbar-container", "about");
+      renderFooter("footer");
     </script>
   </body>
 </html>

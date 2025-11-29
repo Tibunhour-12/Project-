@@ -112,7 +112,7 @@ function renderNavbar(containerId, activePage = "") {
                     <a href="${pathPrefix}/pages/categories.html" class="${getLinkClass(
     "categories"
   )}">Categories</a>
-                    <a href="${pathPrefix}/pages/about.html" class="${getLinkClass(
+                    <a href="${pathPrefix}/pages/about-us.html" class="${getLinkClass(
     "about"
   )}">About Us</a>
                     <a href="${pathPrefix}/pages/book.html" class="${getLinkClass(
@@ -164,7 +164,7 @@ function renderNavbar(containerId, activePage = "") {
       ? "bg-gray-50 dark:bg-slate-800 text-primary  dark:text-accent font-bold"
       : "text-primary dark:text-gray-300 hover:bg-gray-50 dark:bg-slate-800"
   }">Categories</a>
-                <a href="${pathPrefix}/pages/about.html" class="block px-4 py-2 rounded-lg ${
+                <a href="${pathPrefix}/pages/about-us.html" class="block px-4 py-2 rounded-lg ${
     activePage === "about"
       ? "bg-gray-50 dark:bg-slate-800 text-primary dark:text-accent font-bold"
       : "text-primary dark:text-gray-300 hover:bg-gray-50 "
