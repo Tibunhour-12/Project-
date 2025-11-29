@@ -15,6 +15,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- Dark/Light mode theme -->
+    <script src="./js/theme.js"></script>
     <style>
       /* Smooth Mobile Menu Transition */
       .mobile-menu {
@@ -129,9 +132,11 @@
     </section>
 
     <!-- Infinite Marquee Book Section -->
-    <section class="py-12 bg-background overflow-hidden">
+    <section class="py-12 bg-background dark:bg-slate-900 overflow-hidden">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 mb-8">
-        <h2 class="text-3xl font-bold text-primary tracking-tight">
+        <h2
+          class="text-3xl font-bold text-primary dark:text-pure-white tracking-tight"
+        >
           New Releases
         </h2>
       </div>
@@ -247,17 +252,19 @@
     </section>
 
     <!-- Trending Book Section -->
-    <section class="py-16 bg-background">
+    <section class="py-16 bg-background dark:bg-slate-900">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- Header -->
         <div class="mb-10 flex items-center justify-between">
-          <h2 class="text-3xl font-bold text-primary tracking-tight">
+          <h2
+            class="text-3xl font-bold text-primary dark:text-pure-white tracking-tight"
+          >
             Trending Books
           </h2>
           <!-- View All Link -->
           <a
             href="./pages/categories.html"
-            class="sm:flex items-center gap-2 text-secondary font-semibold hover:text-primary transition"
+            class="sm:flex items-center gap-2 text-secondary font-semibold hover:text-primary dark:hover:text-pure-white transition"
           >
             View All <i class="ph-bold ph-arrow-right"></i>
           </a>
@@ -415,11 +422,13 @@
     </section>
 
     <!-- Popular Book Section -->
-    <section class="py-16 bg-background">
+    <section class="py-16 bg-background dark:bg-slate-900">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- Section Header -->
         <div class="mb-8 text-center sm:text-left">
-          <h2 class="text-3xl font-bold text-primary tracking-tight">
+          <h2
+            class="text-3xl font-bold text-primary dark:text-background tracking-tight"
+          >
             Popular Books
           </h2>
           <p class="text-dark-gray mt-2">
@@ -457,7 +466,7 @@
     </section>
 
     <!-- Customer review section -->
-    <section class="pb-16 bg-background">
+    <section class="pb-16 bg-background dark:bg-slate-900">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <!-- Header -->
         <div class="mb-10 text-center sm:text-left">
