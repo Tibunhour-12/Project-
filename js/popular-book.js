@@ -58,11 +58,11 @@ function createPopularBookCard(book) {
             </div>
 
             <!-- Card Body -->
-            <div class="p-4 flex flex-col flex-grow">
+            <div class="p-4 flex flex-col flex-grow dark:bg-slate-900">
                 
                 <!-- Title & Author -->
                 <div class="mb-3">
-                    <h3 class="text-lg font-bold text-primary line-clamp-1" title="${book.title}">
+                    <h3 class="text-lg font-bold text-primary line-clamp-1 dark:text-pure-white" title="${book.title}">
                         ${book.title}
                     </h3>
                     <p class="text-sm text-dark-gray line-clamp-1">${book.author}</p>
