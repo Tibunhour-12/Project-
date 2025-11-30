@@ -84,7 +84,7 @@ export const Utils = {
 
   // Fetches all categories
   async getCategories() {
-    const response = await fetch(`${API_BASE_URL}/categories`);
+    const response = await fetch(`${API_BASE_URL}/categories/`);
     if (!response.ok) throw new Error("Failed to fetch categories.");
     return response.json();
   },
@@ -172,7 +172,7 @@ export const Auth = {
   // Clear all auth data
   logout: () => {
     removeAuth();
-    localStorage.removeItem("user_name"); // --- NEW LINE: Clear name on logout
+    // You might want to redirect to the homepage here
     window.location.href = "/";
   },
 
@@ -197,9 +197,15 @@ export const Auth = {
 // --- API CATEGORY: BOOKS ---
 export const Books = {
   // PUBLIC: Get all books (used for homepage and browsing)
-  async getAll({ page = 1, limit = 20, search = "", category_id = "" } = {}) {
-    const query = new URLSearchParams({ page, limit, search, category_id });
-    const url = `/books?${query.toString()}`;
+  async getAll({ page = 1, limit = 20, search = "", category_id = null } = {}) {
+    // 1. Filter out empty values to avoid validation errors (e.g. sending category_id='')
+    const params = { page, limit };
+    if (search) params.search = search;
+    if (category_id) params.category_id = category_id;
+
+    const query = new URLSearchParams(params);
+    // 2. Added trailing slash as per your fix
+    const url = `/books/?${query.toString()}`;
 
     const response = await fetch(`${API_BASE_URL}${url}`);
     if (!response.ok) throw new Error("Failed to fetch books.");
