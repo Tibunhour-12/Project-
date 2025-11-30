@@ -1,20 +1,10 @@
-/**
- * Renders the Navigation Bar into a specific container.
- * Uses robust "Depth Counting" to calculate relative paths automatically.
- * * @param {string} containerId - The ID of the div where the navbar should be injected.
- * @param {string} activePage - The name of the current page ('home', 'categories', 'about', 'mybook').
- */
-
 function renderNavbar(containerId, activePage = "") {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  // --- 1. ROBUST DEPTH COUNTING LOGIC ---
-
-  // Get the current path (e.g., "/pages/auth/login.html" or "/index.html")
+  // Get the current path
   const path = window.location.pathname;
-
-  let pathPrefix = "."; // Default for root (index.html)
+  let pathPrefix = ".";
 
   // Logic:
   // 1. We assume your project structure puts all sub-pages inside a folder named "pages".
@@ -22,38 +12,23 @@ function renderNavbar(containerId, activePage = "") {
   // 3. We count how many slashes appear AFTER "/pages/".
   // 4. Each slash represents a deeper folder level requiring a "../" to go back up.
 
-  if (path.includes("/pages/") || path.includes("/html/")) {
-    // Split the path at "pages/"
-    // Example: "/project/pages/auth/login.html" -> ["/project/", "auth/login.html"]
-    const parts = path.split(/\/pages\/|\/html\//); // Split by /pages/ or /html/
-
-    // The part after "pages/" tells us the depth
-    // "auth/login.html" -> has 1 slash -> depth is 2 (pages + auth)
-    // "about.html" -> has 0 slashes -> depth is 1 (pages)
+  if (path.includes("/pages/")) {
+    const parts = path.split(/\/pages\//);
     const subPath = parts[1];
-
-    // Count slashes in the sub-path
     const slashCount = (subPath.match(/\//g) || []).length;
-
-    // Base depth is 1 (because we are inside 'pages'), plus any extra folders (slashCount)
     const depth = 1 + slashCount;
-
-    // Create the prefix string (e.g., "../" or "../../")
     pathPrefix = "../".repeat(depth);
-
-    // Remove the trailing slash from the prefix if it exists (e.g. "../../" -> "../..")
-    // to match standard relative linking styles, though keeping the slash is also valid HTML.
-    // For cleaner code generation below, we'll keep the trailing slash and remove the leading dots' slash in the HTML if needed,
-    // OR we just use it as is. Let's strip the last slash for cleaner joining:
     pathPrefix = "../".repeat(depth).slice(0, -1);
   }
 
+  // Auth checking
   // Check if user is logged in by looking for the token in LocalStorage
   const accessToken = localStorage.getItem("access_token");
-  const userRole = localStorage.getItem("user_role"); // 'student', 'teacher', 'admin'
+  const userRole = localStorage.getItem("user_role");
+  const userName = localStorage.getItem("user_name") || "User";
   const isLoggedIn = !!accessToken;
 
-  // --- 2. HELPER FOR ACTIVE LINKS ---
+  // Active Link
   const getLinkClass = (pageName) => {
     const baseClass =
       "font-medium transition-colors duration-200 dark:text-gray-300";
@@ -66,14 +41,14 @@ function renderNavbar(containerId, activePage = "") {
       : `${baseClass} ${inactiveClass}`;
   };
 
-  // --- 3. DYNAMIC BUTTONS (Sign In vs Logout) ---
+  // Dynamic Sign-up/Sign-in Button
   let authButtonHTML = "";
   if (isLoggedIn) {
     // User is Logged In -> Show Logout
     authButtonHTML = `
         <div class="flex items-center gap-4">
             <span class="hidden lg:inline text-sm font-semibold text-primary dark:text-white capitalize">
-                Hi, ${userRole || "User"}
+                Hi, ${userName}
             </span>
             <button id="logout-btn" class="px-5 py-2 bg-primary text-pure-white border font-semibold rounded-lg hover:bg-primary transition shadow-sm flex items-center gap-2">
                 <i class="ph-bold ph-sign-out"></i> Logout
@@ -81,16 +56,13 @@ function renderNavbar(containerId, activePage = "") {
         </div>
       `;
   } else {
-    // User is Guest -> Show Sign In
+    // If user is public user, shows sign in button
     authButtonHTML = `
         <a href="${pathPrefix}/pages/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-semibold rounded-lg hover:bg-secondary transition duration-300 shadow-md">
             Sign In
         </a>
       `;
   }
-
-  // --- 3. HTML TEMPLATE ---
-  // We use `${pathPrefix}/` before every link.
 
   // bg-white/10 backdrop-blur-md border border-white/20
   const navbarHTML = `
@@ -195,7 +167,7 @@ function renderNavbar(containerId, activePage = "") {
   // Inject HTML
   container.innerHTML = navbarHTML;
 
-  // --- 4. EVENT LISTENERS ---
+  // Event Listener
   const btn = container.querySelector("#mobile-menu-btn");
   const menu = container.querySelector("#mobile-menu");
   const icon = btn ? btn.querySelector("i") : null;
@@ -223,7 +195,7 @@ function renderNavbar(containerId, activePage = "") {
     });
   }
 
-  // LOGOUT LOGIC (Desktop & Mobile)
+  // Logout Logic (Desktop & Mobile)
   const handleLogout = () => {
     if (confirm("Are you sure you want to log out?")) {
       localStorage.removeItem("access_token");
@@ -274,4 +246,3 @@ function renderNavbar(containerId, activePage = "") {
   if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
   if (mobileToggleBtn) mobileToggleBtn.addEventListener("click", handleToggle);
 }
-// Dark mode
