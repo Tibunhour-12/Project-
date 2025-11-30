@@ -101,7 +101,7 @@ function renderNavbar(containerId, activePage = "") {
                 <!-- LOGO -->
                 <a href="${pathPrefix}/index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer decoration-0">
                    <!-- Ensure images folder is accessible -->
-                   <img src="${pathPrefix}/img/Libreshelf.png" width="80" alt="Logo">
+                   <img class="w-15 md:w-20" src="${pathPrefix}/img/Libreshelf.png" alt="Logo">
                 </a>
 
                 <!-- DESKTOP MENU -->
@@ -139,13 +139,12 @@ function renderNavbar(containerId, activePage = "") {
                     <!-- Dynamic Auth Button -->
                     ${authButtonHTML}
                 </div>
-                </div>
-
                 <!-- MOBILE MENU HAMBURGER -->
                 <div class="md:hidden flex items-center gap-4">
                     <button id="mobile-menu-btn" class="text-primary dark:text-white focus:outline-none">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
+                </div>
                 </div>
                 </div>
             </div>
