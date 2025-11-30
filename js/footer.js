@@ -24,7 +24,7 @@ function renderFooter(containerId) {
                 <div class="lg:col-span-3">
                     <!-- Logo Group -->
                     <a href="/">
-                        <img src="../img/Libreshelf.png" class="mx-autow-37 dark:hidden" alt="Light Logo">
+                        <img src="../img/Libreshelf.png" class="mx-auto w-37 dark:hidden" alt="Light Logo">
                         <img src="../img/Libreshelf-dark-mode.png" class="mx-auto w-37 hidden dark:block" alt="Dark Logo">
                     </a>
                     
