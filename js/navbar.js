@@ -101,7 +101,8 @@ function renderNavbar(containerId, activePage = "") {
                 <!-- LOGO -->
                 <a href="${pathPrefix}/index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer decoration-0">
                    <!-- Ensure images folder is accessible -->
-                   <img class="w-15 md:w-20" src="${pathPrefix}/img/Libreshelf.png" alt="Logo">
+                   <img src="${pathPrefix}/img/Libreshelf.png" class="w-15 md:w-20 dark:hidden" alt="Light Logo">
+                   <img src="${pathPrefix}/img/Libreshelf-dark-mode.png" class="w-15 md:w-20 hidden dark:block" alt="Dark Logo">
                 </a>
 
                 <!-- DESKTOP MENU -->
@@ -183,8 +184,8 @@ function renderNavbar(containerId, activePage = "") {
                  <!-- Mobile Auth Button -->
                 ${
                   isLoggedIn
-                    ? `<button id="mobile-logout-btn" class="block text-center w-full px-6 py-3 bg-red-50 text-red-600 font-bold rounded-lg mt-2">Logout</button>`
-                    : `<a href="${pathPrefix}/html/signin.html" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2 hover:bg-secondary">Sign In</a>`
+                    ? `<button id="mobile-logout-btn" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2">Logout</button>`
+                    : `<a href="${pathPrefix}/pages/signin.html" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2 hover:bg-secondary">Sign In</a>`
                 }
             </div>
         </div>
