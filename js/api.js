@@ -135,7 +135,12 @@ export const Auth = {
       try {
         const profile = await Utils.getMyProfile();
         setRole(profile.role);
-        console.log(`User logged in as: ${profile.role}`);
+
+        localStorage.setItem(
+          "user_name",
+          profile.full_name || profile.username
+        );
+
         return { success: true, role: profile.role, profile };
       } catch (profileError) {
         console.error(
@@ -167,7 +172,7 @@ export const Auth = {
   // Clear all auth data
   logout: () => {
     removeAuth();
-    // You might want to redirect to the homepage here
+    localStorage.removeItem("user_name"); // --- NEW LINE: Clear name on logout
     window.location.href = "/";
   },
 
