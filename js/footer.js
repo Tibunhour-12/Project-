@@ -8,8 +8,8 @@ function renderFooter(containerId) {
   if (!container) return;
 
   const footerHTML = `
-    <footer class="bg-pure-white text-text-black pt-15 pb-3 border-t border-white/10">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+    <footer class="bg-pure-white text-text-black pt-15 pb-3 border-t border-white/10 dark:bg-slate-900">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 ">
             
             <!-- TOP SECTION: Main 3 Columns -->
             <!-- 
@@ -34,15 +34,15 @@ function renderFooter(containerId) {
                     <!-- Social Icons -->
                     <div class="flex justify-center gap-2 mt-2">
                         <!-- Telegram -->
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary dark:text-pure-white">
                             <i class="text-xl fa-brands fa-telegram "></i>
                         </a>
                         <!-- Facebook -->
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary dark:text-pure-white">
                             <i class="text-xl fa-brands fa-facebook"></i>
                         </a>
                         <!-- GitHub -->
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-pure-white transition-all duration-300 border border-white/10 text-primary dark:text-pure-white">
                             <i class="text-xl fa-brands fa-github" ></i>
                         </a>
                     </div>
@@ -52,7 +52,7 @@ function renderFooter(containerId) {
                 <!-- Flex container to center the block visually -->
                 <div class="lg:col-span-6 flex lg:justify-center">
                     <div class="w-full max-w-md">
-                        <h3 class="text-lg font-bold text-primary mb-8 uppercase tracking-wider border-b border-secondary/30 pb-2 inline-block">
+                        <h3 class="text-lg font-bold text-primary mb-8 uppercase tracking-wider border-b border-secondary/30 pb-2 inline-block dark:text-pure-white">
                             Book Category
                         </h3>
                         
@@ -102,7 +102,7 @@ function renderFooter(containerId) {
                 <!-- 3. RIGHT SECTION: Sitemap (Span 3) -->
                 <div class="lg:col-span-3 dark:text-gray-400 flex flex-col lg:items-end">
                     <div class="w-full lg:w-auto text-left lg:text-right">
-                        <h3 class="text-lg font-bold text-primary mb-8 uppercase tracking-wider border-b border-secondary/30 pb-2 inline-block">
+                        <h3 class="text-lg font-bold text-primary mb-8 uppercase tracking-wider border-b border-secondary/30 pb-2 inline-block dark:text-pure-white">
                             Sitemap
                         </h3>
                         <ul class="space-y-4 text-dark-gray text-sm">
