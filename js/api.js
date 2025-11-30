@@ -172,7 +172,7 @@ export const Auth = {
   // Clear all auth data
   logout: () => {
     removeAuth();
-    // You might want to redirect to the homepage here
+    localStorage.removeItem("user_name"); // --- NEW LINE: Clear name on logout
     window.location.href = "/";
   },
 
