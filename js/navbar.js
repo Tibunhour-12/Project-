@@ -24,8 +24,6 @@ function renderNavbar(containerId, activePage = "") {
   // Auth checking
   // Check if user is logged in by looking for the token in LocalStorage
   const accessToken = localStorage.getItem("access_token");
-  const userRole = localStorage.getItem("user_role");
-  const userName = localStorage.getItem("user_name") || "User";
   const isLoggedIn = !!accessToken;
 
   // Active Link
@@ -42,22 +40,44 @@ function renderNavbar(containerId, activePage = "") {
   };
 
   // Dynamic Sign-up/Sign-in Button
-  let authButtonHTML = "";
+  let authSectionHTML = "";
   if (isLoggedIn) {
-    // User is Logged In -> Show Logout
-    authButtonHTML = `
-        <div class="flex items-center gap-4">
-            <span class="hidden lg:inline text-sm font-semibold text-primary dark:text-white capitalize">
-                Hi, ${userName}
-            </span>
-            <button id="logout-btn" class="px-5 py-2 bg-primary text-pure-white border font-semibold rounded-lg hover:bg-primary transition shadow-sm flex items-center gap-2">
-                <i class="ph-bold ph-sign-out"></i> Logout
+    authSectionHTML = `
+        <div class="relative">
+            <!-- Profile Trigger (Generic Icon) -->
+            <button style="margin-left: 7px;" id="profile-menu-btn" class="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 text-primary dark:text-white transition-colors focus:ring-2 focus:ring-accent">
+                <i class="ph-bold ph-user text-xl"></i>
             </button>
+
+            <!-- Dropdown Menu -->
+            <div id="profile-dropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-100 dark:border-slate-700 hidden transform origin-top-right transition-all duration-200 z-50">
+                <div class="py-1">
+                <!-- ADMIN LINK (Only show if role is admin) -->
+                    ${
+                      localStorage.getItem("user_role") === "admin"
+                        ? `
+                    <a href="${pathPrefix}/pages/admin.html" class="flex items-center gap-2 px-4 py-2 text-sm text-accent font-bold hover:bg-gray-50 dark:hover:bg-slate-700">
+                        <i class="ph-bold ph-shield-check"></i> Admin Panel
+                    </a>
+                    `
+                        : ""
+                    }
+                    <a href="${pathPrefix}/pages/dashboard.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700">
+                        <i class="ph-bold ph-user"></i> Dashboard
+                    </a>
+                    <a href="${pathPrefix}/pages/upload.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700">
+                        <i class="ph-bold ph-upload-simple"></i> Upload Book
+                    </a>
+                    <div class="border-t border-gray-100 dark:border-slate-700 my-1"></div>
+                    <button id="logout-btn" class="w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">
+                        <i class="ph-bold ph-sign-out"></i> Logout
+                    </button>
+                </div>
+            </div>
         </div>
       `;
   } else {
-    // If user is public user, shows sign in button
-    authButtonHTML = `
+    authSectionHTML = `
         <a href="${pathPrefix}/pages/signin.html" class="px-6 py-2.5 bg-primary text-pure-white font-semibold rounded-lg hover:bg-secondary transition duration-300 shadow-md">
             Sign In
         </a>
@@ -94,31 +114,39 @@ function renderNavbar(containerId, activePage = "") {
                 </div>
 
                 <!-- RIGHT ICONS & BUTTON -->
-                <div class="hidden md:flex items-center gap-5">
-                    <button id="theme-toggle" class="text-dark-gray hover:text-primary dark:text-gray-300 dark:hover:text-accent transition-colors">
+                <div class="hidden md:flex items-center">
+                    <!-- 1. Theme Toggle -->
+                    <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-dark-gray hover:text-primary dark:text-gray-300 dark:hover:text-accent transition-colors">
                         <i class="ph ph-moon text-2xl"></i>
                     </button>
 
-                    <!-- Favorite Icon (Only functional if logged in) -->
-                    <button class="text-dark-gray hover:text-secondary dark:text-gray-300 transition-colors relative">
+                    <!-- 2. Heart (Favorites) -->
+                    <!-- TODO: Implement popup later -->
+                    <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-dark-gray hover:text-red-500 dark:text-gray-300 transition-colors relative">
                         <i class="ph ph-heart text-2xl"></i>
-                        ${
-                          isLoggedIn
-                            ? '<span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>'
-                            : ""
-                        }
                     </button>
                     
-                    <!-- Dynamic Auth Button -->
-                    ${authButtonHTML}
+                    <!-- 3. User Auth (Icon or Sign In) -->
+                    ${authSectionHTML}
                 </div>
-                <!-- MOBILE MENU HAMBURGER -->
+
+                 <!-- MOBILE HEADER ICONS -->
                 <div class="md:hidden flex items-center gap-4">
+                    <!-- Show User Icon on Mobile if Logged In -->
+                    ${
+                      isLoggedIn
+                        ? `
+                    <a href="${pathPrefix}/pages/dashboard.html" class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 dark:border-slate-700 text-primary dark:text-white">
+                        <i class="ph-fill ph-user text-xl"></i>
+                    </a>`
+                        : ""
+                    }
+                    
                     <button id="mobile-menu-btn" class="text-primary dark:text-white focus:outline-none">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
                 </div>
-                </div>
+                
                 </div>
             </div>
         </div>
@@ -149,15 +177,25 @@ function renderNavbar(containerId, activePage = "") {
                 <hr class="border-gray-200">
 
                 <!-- Mobile Theme Toggle -->
-                <button id="mobile-theme-toggle" class="flex items-center justify-between w-full px-4 py-2 text-text-black dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg">
-                    <span>Dark Mode</span>
-                    <i class="ph ph-moon text-xl"></i>
-                </button>
+                <div class="flex items-center justify-between px-4 py-2 border-t border-gray-100 dark:border-slate-800 mt-2 pt-4">
+                    <button id="mobile-theme-toggle" class="flex items-center gap-2 text-text-black dark:text-gray-300">
+                        <i class="ph ph-moon text-xl"></i> <span>Dark Mode</span>
+                    </button>
+                    <!-- Mobile Heart -->
+                    <button class="flex items-center gap-2 text-text-black dark:text-gray-300">
+                        <i class="ph ph-heart text-xl"></i> <span>Favorites</span>
+                    </button>
+                </div>
                  <!-- Mobile Auth Button -->
                 ${
+                  !isLoggedIn
+                    ? `<a href="${pathPrefix}/pages/signin.html" class="block text-center w-full px-6 py-3 bg-primary text-white rounded-lg mt-2">Sign In</a>`
+                    : ""
+                }
+                ${
                   isLoggedIn
-                    ? `<button id="mobile-logout-btn" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2">Logout</button>`
-                    : `<a href="${pathPrefix}/pages/signin.html" class="block text-center w-full px-6 py-3 bg-primary text-pure-white font-bold rounded-lg mt-2 hover:bg-secondary">Sign In</a>`
+                    ? `<button id="mobile-logout-btn" class="block text-center w-full px-6 py-3 bg-red-50 text-red-600 font-bold rounded-lg mt-2">Logout</button>`
+                    : ""
                 }
             </div>
         </div>
@@ -168,78 +206,69 @@ function renderNavbar(containerId, activePage = "") {
   container.innerHTML = navbarHTML;
 
   // Event Listener
-  const btn = container.querySelector("#mobile-menu-btn");
-  const menu = container.querySelector("#mobile-menu");
-  const icon = btn ? btn.querySelector("i") : null;
+  const profileBtn = document.getElementById("profile-menu-btn");
+  const dropdown = document.getElementById("profile-dropdown");
 
-  if (btn && menu) {
-    btn.addEventListener("click", () => {
-      const isOpen = !menu.classList.contains("max-h-0");
-      if (isOpen) {
-        // Close
-        menu.classList.add("max-h-0", "opacity-0");
-        menu.classList.remove("max-h-[500px]", "opacity-100");
-        if (icon) {
-          icon.classList.remove("ph-x");
-          icon.classList.add("ph-list");
-        }
-      } else {
-        // Open
-        menu.classList.remove("max-h-0", "opacity-0");
-        menu.classList.add("max-h-[500px]", "opacity-100");
-        if (icon) {
-          icon.classList.remove("ph-list");
-          icon.classList.add("ph-x");
-        }
+  if (profileBtn && dropdown) {
+    profileBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("hidden");
+    });
+    document.addEventListener("click", (e) => {
+      if (!profileBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add("hidden");
       }
     });
   }
 
-  // Logout Logic (Desktop & Mobile)
+  // 2. Mobile Menu
+  const btn = container.querySelector("#mobile-menu-btn");
+  const menu = container.querySelector("#mobile-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("max-h-0");
+      if (isOpen) {
+        menu.classList.add("max-h-0", "opacity-0");
+        menu.classList.remove("max-h-[500px]", "opacity-100");
+      } else {
+        menu.classList.remove("max-h-0", "opacity-0");
+        menu.classList.add("max-h-[500px]", "opacity-100");
+      }
+    });
+  }
+
+  // 3. Logout
   const handleLogout = () => {
-    if (confirm("Are you sure you want to log out?")) {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user_role");
-      window.location.reload(); // Refresh page to update navbar
+    if (confirm("Log out of LibreShelf?")) {
+      localStorage.clear();
+      window.location.href = `${pathPrefix}/index.html`;
     }
   };
-
   const logoutBtn = document.getElementById("logout-btn");
   const mobileLogoutBtn = document.getElementById("mobile-logout-btn");
-
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
   if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", handleLogout);
 
+  // 4. Dark Mode Icons
   const updateIcons = () => {
-    // Check if html tag has .dark class
     const isDark = document.documentElement.classList.contains("dark");
-    const iconClass = isDark ? "ph-sun" : "ph-moon"; // Swap Icon: Sun for Dark, Moon for Light
+    const iconClass = isDark ? "ph-sun" : "ph-moon";
 
     const desktopIcon = document.querySelector("#theme-toggle i");
     const mobileIcon = document.querySelector("#mobile-theme-toggle i");
 
-    if (desktopIcon) {
-      desktopIcon.className = `ph ${iconClass} text-2xl`;
-    }
-    if (mobileIcon) {
-      mobileIcon.className = `ph ${iconClass} text-xl`;
-    }
+    if (desktopIcon) desktopIcon.className = `ph ${iconClass} text-2xl`;
+    if (mobileIcon) mobileIcon.className = `ph ${iconClass} text-xl`;
   };
-
-  // Run once on load to set initial icon
   updateIcons();
 
-  // Listen for clicks
   const toggleBtn = document.getElementById("theme-toggle");
   const mobileToggleBtn = document.getElementById("mobile-theme-toggle");
 
   const handleToggle = () => {
-    // Call the global Theme Manager we created in theme.js
     if (window.LibreTheme) {
       window.LibreTheme.toggle();
       updateIcons();
-    } else {
-      console.error("LibreTheme not found. Make sure theme.js is loaded!");
     }
   };
 
