@@ -120,25 +120,46 @@ function createCardHTML(book) {
   const image =
     book.thumbnail || "https://placehold.co/300x400/112d4e/FFF?text=No+Cover";
   const id = book.id;
+  const fileUrl = book.file_url || "#";
+  const target = book.file_url ? "_blank" : "_self";
 
   return `
         <div class="group bg-white dark:bg-slate-800 rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full animate-fade-in">
             <!-- Cover -->
-            <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-slate-700">
+             <a href="detail.html?id=${id}" class="relative aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-slate-700 cursor-pointer">
                 <img src="${image}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.src='https://placehold.co/300x400/112d4e/FFF?text=Error'">
-            </div>
+            </a>
+            
             <!-- Body -->
             <div class="p-4 flex flex-col flex-1">
-                <h3 class="font-bold text-primary dark:text-white text-lg line-clamp-1 mb-1" title="${title}">${title}</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 mb-3 h-8">${desc}</p>
+                <!-- 2. Title Link -> Goes to Detail Page -->
+                <a href="detail.html?id=${id}" class="block group-hover:text-accent transition-colors">
+                    <h3 class="font-bold text-primary dark:text-white text-lg line-clamp-1 mb-1" title="${title}">
+                        ${title}
+                    </h3>
+                </a>
+                
+                <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 mb-3 h-8">
+                    ${desc}
+                </p>
+
                 <hr class="border-gray-200 dark:border-slate-700 my-2">
-                <!-- Icons -->
+
+                <!-- Icons Row -->
                 <div class="flex items-center justify-between mt-auto pt-1">
                     <div class="flex gap-3">
-                        <button class="text-gray-400 hover:text-red-500 transition-colors"><i class="ph-bold ph-heart text-xl"></i></button>
-                        <button class="text-gray-400 hover:text-blue-500 transition-colors"><i class="ph-bold ph-share-network text-xl"></i></button>
+                        <button class="text-gray-400 hover:text-red-500 transition-colors" title="Favorite">
+                            <i class="ph-bold ph-heart text-xl"></i>
+                        </button>
+                        <button class="text-gray-400 hover:text-blue-500 transition-colors" title="Share">
+                            <i class="ph-bold ph-share-network text-xl"></i>
+                        </button>
                     </div>
-                    <a href="./detail.html?id=${id}" class="text-primary dark:text-accent hover:text-secondary transition-colors"><i class="ph-bold ph-download-simple text-xl"></i></a>
+                    
+                    <!-- 3. Download Link -> Goes to actual file (NOT detail page) -->
+                    <a href="${fileUrl}" target="${target}" class="text-primary dark:text-accent hover:text-secondary transition-colors" title="Download PDF">
+                        <i class="ph-bold ph-download-simple text-xl"></i>
+                    </a>
                 </div>
             </div>
         </div>
