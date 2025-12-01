@@ -78,8 +78,13 @@ async function protectedRequest(endpoint, method = "GET", body = null) {
 // --- UTILITIES (Used by Auth and other sections) ---
 export const Utils = {
   // Fetches profile to get the user role
+  // ... other utils ...
+  // ...
   async getMyProfile() {
     return protectedRequest("/users/me", "GET");
+  },
+  async checkAdminStatus() {
+    return protectedRequest("/auth/admin-only", "GET");
   },
 
   // Fetches all categories
@@ -133,25 +138,22 @@ export const Auth = {
 
       // 2. Fetch Profile immediately to get the Role
       try {
+        // Fetch Profile to get Role, ID, Name, and Avatar
         const profile = await Utils.getMyProfile();
-        setRole(profile.role);
 
+        setRole(profile.role);
         localStorage.setItem(
           "user_name",
           profile.full_name || profile.username
         );
+        localStorage.setItem("user_id", profile.id); // <--- SAVE ID
+        localStorage.setItem("user_avatar", profile.profile_url); // <--- SAVE AVATAR
 
         return { success: true, role: profile.role, profile };
       } catch (profileError) {
-        console.error(
-          "Failed to fetch user profile after login.",
-          profileError
-        );
-        removeAuth(); // Clear token if profile fetch fails
-        return {
-          success: false,
-          error: "Login successful but profile access denied.",
-        };
+        console.error("Profile fetch error", profileError);
+        removeAuth();
+        return { success: false, error: "Login success but profile failed." };
       }
     } else {
       return { success: false, error: data.detail || "Login failed." };
@@ -230,5 +232,29 @@ export const Books = {
   // TEACHER/ADMIN ONLY: Delete book
   async delete(bookId) {
     return protectedRequest(`/books/${bookId}`, "DELETE");
+  },
+};
+
+// --- API CATEGORY: CATEGORIES (Admin) ---
+export const Categories = {
+  async getAll() {
+    // We already have Utils.getCategories, but this keeps it organized
+    const response = await fetch(`${API_BASE_URL}/categories/`);
+    if (!response.ok) throw new Error("Failed to fetch categories.");
+    return response.json();
+  },
+
+  // Create a new category (Admin only)
+  async create(name, description, parentId = 1) {
+    return protectedRequest("/categories", "POST", {
+      name,
+      description,
+      parent_id: parentId,
+    });
+  },
+
+  // Delete a category (Admin only)
+  async delete(id) {
+    return protectedRequest(`/categories/${id}`, "DELETE");
   },
 };
